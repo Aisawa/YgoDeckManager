@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="YgoDeckManager/YgoDeckManager.Client/YgoDeckManager.Client.csproj" />
+  <Project Path="YgoDeckManager/YgoDeckManager/YgoDeckManager.csproj" />
+</Solution>
