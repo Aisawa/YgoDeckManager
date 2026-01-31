@@ -1,7 +1,44 @@
-﻿@page "/"
+﻿@page "/deck-viewer"
+@using YgoDeckManager.Client.Services
+@using YgoDeckManager.Shared.DTOs
+@inject CardClientService CardService
 
-<PageTitle>Home</PageTitle>
+<div class="row">
+    <div class="col-md-3" style="max-height: 90vh; overflow-y: auto;">
+        <ul class="list-group">
+            @if (sets != null)
+            {
+                foreach (var s in sets)
+                {
+                    <button class="list-group-item list-group-item-action" @onclick="() => LoadCards(s.set_name)">
+                        @s.set_name
+                    </button>
+                }
+            }
+        </ul>
+    </div>
 
-<h1>Hello, world!</h1>
+    <div class="col-md-9">
+        <div class="row row-cols-5 g-3">
+            @if (cards != null)
+            {
+                foreach (var card in cards)
+                {
+                    <div class="col text-center">
+                        <img src="@card.card_images[0].image_url_small" class="img-fluid" />
+                        <p class="small">@card.name</p>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
 
-Welcome to your new app.
+@code {
+    private List<CardSetDTO> sets;
+    private List<CardDTO> cards;
+
+    protected override async Task OnInitializedAsync() => sets = await CardService.GetSetsAsync();
+
+    private async Task LoadCards(string setName) => cards = await CardService.GetCardsBySetAsync(setName);
+}
