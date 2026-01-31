@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\YgoDeckManager.Shared\YgoDeckManager.Shared.csproj" />
     <ProjectReference Include="..\YgoDeckManager.Client\YgoDeckManager.Client.csproj" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="10.0.2" />
   </ItemGroup>
